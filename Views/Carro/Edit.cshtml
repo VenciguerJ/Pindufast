@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Criar oferta";
+}
+
+@model Carro
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Cadastro de Carro</h2>
+    <form asp-controller="Carro" asp-action="Edit" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="placa" class="form-label">Placa</label>
+            <input type="text" class="form-control" id="placa" asp-for="Placa" placeholder="Digite a placa" required>
+        </div>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" asp-for="Nome" placeholder="Digite o nome do carro" required>
+        </div>
+        <div class="mb-3">
+            <label for="portas" class="form-label">Número de Portas</label>
+            <input type="number" class="form-control" id="portas" asp-for="Portas" min="1" placeholder="Quantidade de portas" required>
+        </div>
+        <div class="mb-3">
+            <label for="disponivel" class="form-label">Disponível</label>
+            <select class="form-select" id="disponivel" asp-for="Ativo" required>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="imagem" class="form-label">Imagem do Carro</label>
+            <input type="file" class="form-control" id="imagem" asp-for="Imagem" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+            <label for="preco" class="form-label">Preço</label>
+            <input type="number" class="form-control" id="preco" asp-for="Preco" step="0.01" placeholder="Digite o preço" required>
+        </div>
+        <div class="mb-3">
+            <label for="dataPublicacao" class="form-label">Data de Publicação</label>
+            <input type="date" class="form-control" id="dataPublicacao" asp-for="DataPublicacao" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
