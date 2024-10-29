@@ -1,63 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PinduFast.Data;
 using PinduFast.Models;
 using System.Diagnostics;
-using System.IO;
-using static System.Net.Mime.MediaTypeNames;
+using PinduFast.Repositories;
 
 
 namespace PinduFast.Controllers;
 
 public class CarroController : Controller
 {
-    private readonly ILogger<CarroController> _logger;
-    private readonly AppDbContext _context;
+    private readonly IRepository<Carro> _carroRepository;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public CarroController(ILogger<CarroController> logger, AppDbContext dbc, IWebHostEnvironment IHE)
+    public CarroController(IRepository<Carro> carroRepository, IWebHostEnvironment IHE)
     {
-        _context = dbc;
-        _logger = logger;
+        _carroRepository = carroRepository;
         _webHostEnvironment = IHE;
     }
-
-    public async Task<IActionResult> Index(string searchString, int? IsActive)
+    public async Task<IActionResult> Index(string? searchString, int? IsActive)
     {
-        int firstReload = 0;
-
-        // Se o valor não foi definido, defina-o como true ou false (valor padrão)
-        int isActiveValue = IsActive ?? 1; // Definir como `true` por padrão, você pode mudar para false se preferir.
-
         try
         {
             if (!String.IsNullOrEmpty(searchString))
             {
-                // Query com busca por string e status
-                var resultado = await _context.Carro
-                    .FromSqlInterpolated($"SELECT * FROM Carro WHERE Nome LIKE '%' + {searchString} + '%' AND Ativo = {isActiveValue}")
-                    .ToListAsync();
+                var resultado = await _carroRepository.BuscaComplete(searchString, IsActive);
 
                 return View(resultado);
             }
             else
-            {
-                // Query sem busca, apenas por status
-                var resultado = await _context.Carro
-                    .FromSqlInterpolated($"SELECT * FROM Carro WHERE Ativo = {isActiveValue}")
-                    .ToListAsync();
+            {   searchString = "";
+                if(IsActive == null)
+                {
+                    var resultado = await _carroRepository.GetAll();
+                    return View(resultado);
+                }
+                else
+                {
+                    var resultado = await _carroRepository.BuscaComplete(searchString, IsActive);
+                    return View(resultado);
+                }
 
-                return View(resultado);
+                
             }
         }
         catch (Exception ex)
         {
             // Tratamento de erro
-            TempData["ErrorMessage"] = "Erro ao realizar operação, consulte o console de desenvolvedor.";
+            TempData["ErrorMessage"] = "Erro ao realizar operaÃ§Ã£o, consulte o console de desenvolvedor.";
             Console.WriteLine(ex.ToString());
 
             // Caso de erro, retorna todos os carros
-            var carros = await _context.Carro.ToListAsync();
+            var carros = await _carroRepository.GetAll();
             return View(carros);
         }
     }
@@ -83,14 +75,13 @@ public class CarroController : Controller
                 string caminhoImagemPadrao = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Default_img.jpg");
                 c.Imagem = System.IO.File.ReadAllBytes(caminhoImagemPadrao);
             }
-            _context.Carro.Add(c); // Adiciona o novo produto
-            _context.SaveChanges(); // Salva as alterações no banco
+           await _carroRepository.Add(c);
             TempData["FineAlert"] = "Anuncio criado com sucesso!";
             
         }
         catch(Exception ex)
         {
-            TempData["ErrorMessage"] = "Erro ao realizar operação, consulte o console de desenvolvedor";
+            TempData["ErrorMessage"] = "Erro ao realizar operaÃ§Ã£o, consulte o console de desenvolvedor";
             Console.WriteLine(ex.ToString());
         }
         return RedirectToAction("Index");
@@ -99,7 +90,7 @@ public class CarroController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        Carro carro = await _context.Carro.FindAsync(id);
+        Carro? carro = await _carroRepository.GetById(id);
 
         return View(carro);
     }
@@ -118,17 +109,15 @@ public class CarroController : Controller
             string caminhoImagemPadrao = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Default_img.jpg");
             c.Imagem = System.IO.File.ReadAllBytes(caminhoImagemPadrao);
         }
-        _context.Carro.Update(c);
-        _context.SaveChanges();
+        await _carroRepository.Update(c);
         TempData["FineMessage"] = "Cadastro atualizado!";
         return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Delete(int id)
     {
-        Carro c = await _context.Carro.FindAsync(id);
-        _context.Carro.Remove(c);
-        _context.SaveChanges();
+        Carro? c = await _carroRepository.GetById(id);
+        await _carroRepository.Delete(id);
          TempData["FineMessage"] = "Cadastro Excluido!";
         return RedirectToAction("Index");
     }

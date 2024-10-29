@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PinduFast")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10601ecd76cb02f1066f37b61f0b6ce9357e4e4d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PinduFast")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PinduFast")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

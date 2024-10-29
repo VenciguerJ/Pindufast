@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PC\\Faculdade\\4 Semestre\\Trabalho NP2 programação WEB\\PinduFast\\PinduFast.csproj": {}
+    "C:\\Users\\08020155902\\Desktop\\OUTROS\\POO2\\NP2 Cesar\\PinduFast.csproj": {}
   },
   "projects": {
-    "C:\\PC\\Faculdade\\4 Semestre\\Trabalho NP2 programação WEB\\PinduFast\\PinduFast.csproj": {
+    "C:\\Users\\08020155902\\Desktop\\OUTROS\\POO2\\NP2 Cesar\\PinduFast.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PC\\Faculdade\\4 Semestre\\Trabalho NP2 programação WEB\\PinduFast\\PinduFast.csproj",
+        "projectUniqueName": "C:\\Users\\08020155902\\Desktop\\OUTROS\\POO2\\NP2 Cesar\\PinduFast.csproj",
         "projectName": "PinduFast",
-        "projectPath": "C:\\PC\\Faculdade\\4 Semestre\\Trabalho NP2 programação WEB\\PinduFast\\PinduFast.csproj",
-        "packagesPath": "C:\\Users\\Xeansao\\.nuget\\packages\\",
-        "outputPath": "C:\\PC\\Faculdade\\4 Semestre\\Trabalho NP2 programação WEB\\PinduFast\\obj\\",
+        "projectPath": "C:\\Users\\08020155902\\Desktop\\OUTROS\\POO2\\NP2 Cesar\\PinduFast.csproj",
+        "packagesPath": "C:\\Users\\08020155902\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\08020155902\\Desktop\\OUTROS\\POO2\\NP2 Cesar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Xeansao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\08020155902\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.35, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.2.2, )"
@@ -63,6 +66,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.10, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
             }
           },
           "imports": [
@@ -84,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

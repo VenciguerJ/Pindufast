@@ -8,10 +8,10 @@ public class Carro
     public int Id { get; set; }
 
     [MaxLength(7)]
-    public string Placa {  get; set; }
+    public string ? Placa {  get; set; }
 
     [MaxLength(50)]
-	public string Nome {  get; set; }
+	public string ? Nome {  get; set; }
 
     [Required(ErrorMessage ="Campo obrigatório")]
     public int Portas {  get; set; }

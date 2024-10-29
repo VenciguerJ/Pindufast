@@ -1,14 +1,21 @@
-using PinduFast.Data;
 using PinduFast.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using PinduFast.Repositories;
+using System.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+
+string connectionString = @"Server=localhost;Database=Pindufast;Integrated Security=True;
+                        TrustServerCertificate=True;";
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost;Database=Pindufast;Integrated Security=True;TrustServerCertificate=True;"));
+builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionString));
+builder.Services.AddScoped<IRepository<Carro>, CarroRepository>();
+
 //builder.Services.AddScoped(sp => )
 
 var app = builder.Build();
